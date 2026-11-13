@@ -1,0 +1,4 @@
+backend/node_modules/
+backend/.env
+frontend/
+# ou então coloca o node_modules e .env de forma global
