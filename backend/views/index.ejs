@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TJPB Cadastro de Processos</title>
+    <link rel="stylesheet" href="/public/style.css">
+</head>
+<body>
+
+    <%- include ("register")%>
+    
+    <section id="listContainer" class="case_list_container">
+        <h1>TJPB Processos</h1>
+
+        <table id="caseTable" class="case_tabe data_table">
+
+            <thead>
+                <tr>
+                    <th>Número do Processo</th>
+                    <th>Classe Processual</th>
+                    <th>Data do Processo</th>
+                    <th>Assunto</th>
+                    <th>Prazo para Conclusão</th>
+                    <th>Situaçao Atual</th>
+                    <th>Responsável</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <% caseList.forEach(caseItem => {%>
+                <tr>
+
+                        <td><%= caseItem.number %></td>
+                        <td><%= caseItem.type %></td>
+                        <td><%= caseItem.date %></td>
+                        <td><%= caseItem.subject %></td>
+                        <td><%= caseItem.deadLine %></td>
+                        <td><%= caseItem.status %></td>
+                        <td><%= caseItem.responsible %></td>
+
+                    </tr>   
+                    <%})%>
+            </tbody>
+        </table>
+    </section>
+    
+    <script src="/js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+
+<section id="RegisterContainer" class="case_register_container">
+    <form id="caseForm" class="new_case_form">
+        <label for="caseNumber">Número</label>
+        <input id="caseNumber" type="number" name="number" class="form_input" placeholder="Numero do Processo" required="true" >
+        <label for="caseType">Tipo:</label>
+        <select name="type" id="caseType" class="case_type_select form_input">
+            <option value="#">Opções</option>
+            <option value="Açao Penal">Ação Penal</option>
+            <option value="Habeas Corpus">Habeas Corpus</option>
+            <option value="Ação Civíl">Ação Civíl</option>
+            <option value="Mandado de Segurança">Mandado de Segurança</option>
+        </select>
+        <label for="caseDate">Data</label>
+        <input id="caseDate" type="date" name="date" class="form_input" placeholder="Data do Processo" required="true" >
+        <label for="caseSubject">Assunto</label>
+        <input id="caseSubject" type="text" name="subject" class="form_input" placeholder="Assunto do Processo" required="true" >
+        <label for="caseDeadLine">Prazo</label>
+        <input id="caseDeadLine" type="date" name="dead_line" class="form_input" placeholder="Prazo do Processo" required="true" >
+        <select name="status" id="caseStatus" class="case_status_select form_input">
+            <option value="#">Opções</option>
+            <option value="Em Andamento">Em Andamento</option>
+            <option value="Concluído">Concluido</option>
+            <option value="Arquivado">Arquivado</option>
+        </select>
+        <label for="caseResponsible">Responsável</label>
+        <input id="caseResponsible" type="text" name="responsible" class="form_input" placeholder="Responsavel pelo Processo" required="true" >
+        <button id="caseBtn" class="form_btn" type="submit">Registrar</button>
+    </form>
+</section>
