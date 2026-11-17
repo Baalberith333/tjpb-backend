@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
-const {MongoClient} = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const ejs = require("ejs");
 const path = require("path");
 
@@ -60,6 +60,59 @@ app.post("/api/cases", async (req,res) => {
 
 })
 
+app.put("/api/updateCase/:id", async (req, res) => {
+
+    try {
+        
+        
+        const id = req.params.id;
+        const updateId = new ObjectId(id);
+        
+        const {number, type, date, subject, deadLine, status, responsible} = req.body;
+        
+        if (!number || !type || !date || !subject || !deadLine || !status || !responsible) {
+            
+        console.log("At least one field must be filled up! ")
+        
+    }
+
+    const updatedCase = {
+        number, 
+        type,
+        date, 
+        subject, 
+        deadLine, 
+        status, 
+        responsible
+    }
+    
+    const updated = await db.collection("cases").updateOne(
+        {_id: updateId},
+        {$set: updatedCase}
+);
+    
+    if (updated.matchedCount === 0) {
+        
+        return res.status(404).send({
+            message: "Case not found!",
+            updated: updated.matchedCount
+        }) 
+    }
+    
+    res.status(201).json({
+        message: "Updated successfully!",
+        updated: updated
+    })
+
+} catch (error) {
+    console.log("Error: Server error!", error)
+    res.status(500).json({
+        message: "Server Error: Try later!"
+    })
+}
+
+})
+
 app.get("/", async (req,res) => {
 
     try {
@@ -100,6 +153,35 @@ app.get("/api/getCases", async (req,res) => {
         res.status(500).json({message: "Internal server error!"})
     }
 
+
+})
+
+app.delete("/api/deleteCase/:id", async (req,res) => {
+
+    try {
+        
+        const id = req.params.id;
+        const caseId = new ObjectId(id);
+        
+        const deleteCase = await db.collection("cases").deleteOne({_id: caseId});
+        
+    if (deleteCase.deletedCount === 0) {
+        console.log("Not Found!")
+        return res.status(404).json({message: "Error: case not found!"})
+    
+    }
+    
+    res.status(200).json({
+        
+        message: "Case deleted successfully!",
+        deleted: deleteCase.deletedCount
+    })
+
+} catch (error) {
+    
+    console.error("Error: Server Error!", error)
+    res.status(500).json({message: "Server internal error!"})
+}
 
 })
 
